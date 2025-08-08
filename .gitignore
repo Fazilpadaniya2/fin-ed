@@ -1,0 +1,28 @@
+# run this in the fin-ed root
+cat > .gitignore << 'EOF'
+# OS junk
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Builds / outputs
+dist/
+build/
+coverage/
+
+# Env & secrets
+.env
+*.env
+server/.env
+
+# Editor files
+.vscode/
+.idea/
+
+# Misc
+*.log
+EOF
