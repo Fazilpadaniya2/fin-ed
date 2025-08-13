@@ -1,43 +1,52 @@
 @import "tailwindcss";
 
 @theme {
-  /* brand */
-  --color-brand-50:  #F0FDF4;
-  --color-brand-100: #DCFCE7;
-  --color-brand-500: #22C55E;
-  --color-brand-600: #16A34A;
-  --color-brand-700: #15803D;
+  /* brand – bright green */
+  --color-brand-50:  #E9FBD6;  /* pale mint (selection tiles) */
+  --color-brand-100: #D2F8B0;
+  --color-brand-500: #58CC02;  /* main brand green */
+  --color-brand-600: #3FB000;
+  --color-brand-700: #2A7A00;
 
-  /* accent – rewards */
-  --color-accent-50:  #FEF3C7;
-  --color-accent-500: #F59E0B;
-  --color-accent-600: #D97706;
+  /* accent – coins / highlights (warm gold) */
+  --color-accent-50:  #FFF3C4;
+  --color-accent-500: #FFB703;
+  --color-accent-600: #F59E0B;
 
-  /* info */
+  /* info – optional cyan for links/help */
   --color-info-100: #CFFAFE;
   --color-info-500: #06B6D4;
   --color-info-600: #0891B2;
 
-  /* neutrals */
-  --color-neutral-50:  #FFFFFF;
-  --color-neutral-100: #F1F5F9;
-  --color-neutral-500: #64748B;
-  --color-neutral-900: #0F172A;
+  /* neutrals – teal-leaning backgrounds + light text */
+  --color-neutral-50:  #F1FFF7;  /* soft “white” for cards on dark teal */
+  --color-neutral-100: #E3F7ED;  /* subtle card bg */
+  --color-neutral-500: #A8CFC6;  /* muted labels on teal */
+  --color-neutral-900: #0D3B36;  /* deep teal app background */
 
   /* status */
-  --color-danger-500: #EF4444;
-  --color-warning-500: #F59E0B;
-  --color-success-500: #22C55E;
+  --color-danger-500:  #EF4444;
+  --color-warning-500: #FFB703;
+  --color-success-500: #58CC02;
 }
 
-/* optional dark mode */
+/* optional darker theme */
 [data-theme="dark"] {
-  --color-neutral-50:  #0B1220;
-  --color-neutral-100: #0F172A;
-  --color-neutral-500: #94A3B8;
-  --color-neutral-900: #E2E8F0;
+  --color-neutral-50:  #082C28;
+  --color-neutral-100: #0B3A34;
+  --color-neutral-500: #9ED6CB;
+  --color-neutral-900: #EAFBF4;
 
-  /* slightly brighter brand in dark */
-  --color-brand-500: #34D399;
-  --color-brand-600: #22C55E;
+  /* nudge brand a bit brighter on dark */
+  --color-brand-500: #66DD0A;
+  --color-brand-600: #58CC02;
+}
+
+:root{
+  --c-coral:    #FF6B6B; /* coral pink */
+  --c-peach:    #FFC6A8; /* peach */
+  --c-cream:    #FFF4E6; /* cream */
+  --c-brown:    #6B4F4F; /* brownish */
+  --c-rose:     #C44569; /* deep rose */
+  --c-ink:      #1F1F1F; /* neutral text */
 }
