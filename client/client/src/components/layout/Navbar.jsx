@@ -22,6 +22,7 @@ export default function Navbar() {
         <div className="text-3xl font-extrabold tracking-tight leading-none">
           <span className="text-brand-500">fin</span>
           <span className="text-brand-600">ed</span>
+          <h3 className="text-xl">Hey Fazil</h3>
         </div>
       </div>
 

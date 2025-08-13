@@ -19,15 +19,8 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
 
         {/*protected route*/}
-         <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-      { /*  <Route path="/dashboard" element={<Dashboard />}>
+        
+       <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<MainScreen />} /> 
           <Route path="banking" element={<Banking />} />
           <Route path="banking/1" element={<h1>Lessong 1</h1>} />
@@ -39,8 +32,7 @@ export default function AppRoutes() {
 
 
         </Route>
-     */ }
-
+     
       </Routes>
     </BrowserRouter>
   );

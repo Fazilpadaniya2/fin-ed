@@ -42,11 +42,3 @@
   --color-brand-600: #58CC02;
 }
 
-:root{
-  --c-coral:    #FF6B6B; /* coral pink */
-  --c-peach:    #FFC6A8; /* peach */
-  --c-cream:    #FFF4E6; /* cream */
-  --c-brown:    #6B4F4F; /* brownish */
-  --c-rose:     #C44569; /* deep rose */
-  --c-ink:      #1F1F1F; /* neutral text */
-}
