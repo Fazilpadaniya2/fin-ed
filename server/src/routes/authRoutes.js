@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { loginRoute, registerRoute, me } from '../controllers/authRoutes.js';
+import { loginRoute, registerRoute, me } from '../controllers/authController.js';
 import { requireAuth } from '../middleware/auth.js';
 
 //importing router from 

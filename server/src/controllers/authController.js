@@ -72,7 +72,7 @@
                 const payload = { id: user.id, username: user.username, email: user.email, role: user.role };
                 const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-                res.json({ token, user: payload });
+                res.status(200).json({ token, user: payload });
             } catch (err) {
                 console.log("error");
                 res.status(500).json('Internal server error');
