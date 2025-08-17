@@ -49,7 +49,7 @@ svg = banking;
           </div>
 
 
-        <Link to={`/dashboard/${name.toLowerCase().replace(/\s+/g, "-")}`}>
+        <Link to={`/${name.toLowerCase().replace(/\s+/g, "-")}`}>
           <button
             className="mt-8 inline-flex items-center justify-center rounded-2xl bg-[var(--color-brand-500)] px-8 py-4 text-lg font-bold text-white shadow-sm shadow-black/10 transition hover:bg-[var(--color-brand-600)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-brand-100)]">
             {startOrCountinue}

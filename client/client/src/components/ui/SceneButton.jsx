@@ -1,10 +1,11 @@
 
 
-export default function SceneButton({id, Active, click}){
+export default function SceneButton({topicId, number, title }){
 
+  const active = true;
 
     return(<>
-{Active ? (
+{active ? (
    <button type="button" aria-pressed="true"  className="relative grid place-items-center">
     {/* outer ring */}
     <div className="p-2 rounded-full bg-[#F1F5F9]">
@@ -15,12 +16,16 @@ export default function SceneButton({id, Active, click}){
           <path d="M12 4v16" />
           <path d="M8.5 8.5c0-1.7 1.6-2.5 3.5-2.5s3.5.8 3.5 2.5c0 1.3-.9 2-2.7 2.4l-2.1.5c-1.7.4-2.7 1-2.7 2.4 0 1.6 1.6 2.6 3.8 2.6s3.8-1 3.8-2.6" />
         </svg>
+        <span>
+          topic number: {number} <br />
+          topic title: {title}
+        </span>
       </div>
     </div>
     {/* base shadow */}
-    <div className="pointer-events-none absolute bottom-[-6px] left-1/2 -translate-x-1/2 h-5 w-16 rounded-full bg-[#15803D]/20">{id}</div>
+    <div className="pointer-events-none absolute bottom-[-6px] left-1/2 -translate-x-1/2 h-5 w-16 rounded-full bg-[#15803D]/20">Topic id:{topicId}</div>
   </button>
-) : ( <button type="button" aria-pressed="false" onClick={click} className="relative grid place-items-center">
+) : ( <button type="button" aria-pressed="false" className="relative grid place-items-center">
   
     <div className="p-2 rounded-full bg-[#F1F5F9]">
      
@@ -31,7 +36,7 @@ export default function SceneButton({id, Active, click}){
         </svg>
       </div>
     </div>
-    <div className="pointer-events-none absolute bottom-[-6px] left-1/2 -translate-x-1/2 h-5 w-16 rounded-full bg-black/15">{id}</div>
+    <div className="pointer-events-none absolute bottom-[-6px] left-1/2 -translate-x-1/2 h-5 w-16 rounded-full bg-black/15">Topic id:{topicId}</div>
   </button>)}
 </>)
 

@@ -4,33 +4,33 @@ import { useEffect, useState } from 'react'
 import api from '../../../../lib/api.js'
 import { useParams } from "react-router-dom";
 import SceneButton from '../../../ui/SceneButton.jsx'
+import { useScenes } from '../../../../context/ScenesContext.jsx';
 export default function Banking(){
 
 
-
+const {scenes, loading, err} = useScenes();
     
-    const { scene, act } = useParams(); // expecting route like /dashboard/banking/s1/a1
-  const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState("");
-  const [result, setResult] = useState(null);
 const[totalButtons, setTotalButtons] = useState(0);
 const [activeIndex, setActiveIndex] = useState(0);
-  useEffect(() => {
-    
-
-    fetchAct();
-  }, []);
+ 
+if(loading){
+  return <h1>Loading..</h1>
+}
+if(err){
+  return <h1>{err}</h1>
+}
   return(
     <>
-       <div className="grid grid-cols-2 gap-4">
-      {Array.from({ length: totalButtons }, (_, i) => (
-        <SceneButton
-          key={i}
-          id={i + 1}
-          Active={i === activeIndex}
-          click={() => setActiveIndex(i)}
-        />
-      ))}
+       <div className="flex flex-row">
+     {scenes.map((s, idx)=>(
+      <SceneButton
+      key={s.scene_id}
+      topicId={s.topic_id}
+      number= {s.number}
+      title = {s.title}
+      />
+    ))
+     }
     </div>
  
 </>
