@@ -2,7 +2,7 @@
 //Have possibly 2 or 3 useState variables namely formdata, err,
 //change the form data using onChange, and then submit a get request using axios
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api from '../../lib/api.js'
 function Login(){
 
@@ -98,6 +98,12 @@ function Login(){
             {loading ? "Signing in..." : "Sign in"}
           </button>
         </form>
+        
+        <span>
+          <Link to={"/register"} className="text-info-600 hover:underline">
+          Don't have an account? Sign up
+          </Link>
+        </span>
       </div>
     </div>
 

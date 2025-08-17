@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Button from "../ui/Button";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const items = [
   { to: "/dashboard/learn",         icon: "🏠", label: "LEARN" },
@@ -13,8 +14,25 @@ const items = [
 
 
 
+
+
 export default function Navbar() {
     const [activeId, setActiveId] = useState(0);
+    const [user, setUser] = useState("");
+
+
+    //later we will make a use Context of this
+    useEffect(() => {
+      
+      const stored = localStorage.getItem("user");
+      if(stored){
+      const parsed = JSON.parse(stored);
+      setUser(parsed.username);
+      }
+console.log(user) ;  
+    }, []);
+
+    
   return (
     <aside className="sticky top-0 z-50 h-screen w-[280px] bg-neutral-900 px-4 py-6 text-neutral-50">
       {/* brand */}
@@ -22,7 +40,7 @@ export default function Navbar() {
         <div className="text-3xl font-extrabold tracking-tight leading-none">
           <span className="text-brand-500">fin</span>
           <span className="text-brand-600">ed</span>
-          <h3 className="text-xl">Hey Fazil</h3>
+          <h3 className="text-xl">{user}</h3>
         </div>
       </div>
 

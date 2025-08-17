@@ -14,22 +14,24 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         {/*public route*/}
-        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
         {/*protected route*/}
         
-       <Route path="/dashboard" element={<Dashboard />}>
-          <Route index element={<MainScreen />} /> 
-          <Route path="banking-basics" element={<Banking />} />
-          <Route path="credit-cards-101" element={<CreditCard />} />
-          <Route path="budgeting-101" element={<Budgeting />} />
-          
-
-
-
-        </Route>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<MainScreen />} />
+        <Route path="banking-basics" element={<Banking />} />
+        <Route path="credit-cards-101" element={<CreditCard />} />
+        <Route path="budgeting-101" element={<Budgeting />} />
+      </Route>
      
       </Routes>
     </BrowserRouter>
