@@ -6,9 +6,9 @@ import ProtectedRoute from "./ProtectedRoutes";
 import '../index.css'
 import Dashboard from '../pages/Dashboard/Index.jsx'
 import MainScreen from "../components/MainScreen/MainScreen.jsx"; 
-import Banking from "../components/MainScreen/topics/Banking/Banking.jsx";
-import Crypto from "../components/MainScreen/topics/Crypto/Crypto.jsx";
-import Stocks from "../components/MainScreen/topics/Stocks/Stocks.jsx";
+import Banking from "../components/MainScreen/topics/Banking-Basics/Banking.jsx";
+import CreditCard from "../components/MainScreen/topics/Credit-Cards-101/creditCard.jsx";
+import Budgeting from "../components/MainScreen/topics/Budgeting-101/Budgeting.jsx";
 export default function AppRoutes() {
   return (
     <BrowserRouter>
@@ -22,12 +22,10 @@ export default function AppRoutes() {
         
        <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<MainScreen />} /> 
-          <Route path="banking" element={<Banking />} />
-          <Route path="banking/1" element={<h1>Lessong 1</h1>} />
-          <Route path="crypto" element={<Crypto />} />
-          <Route path="crypto/2" element={<h1>Lessong 2</h1>} />
-          <Route path="stocks" element={<Stocks />} />
-          <Route path="stocks/3" element={<h1>Lessong 1</h1>} />
+          <Route path="banking-basics" element={<Banking />} />
+          <Route path="credit-cards-101" element={<CreditCard />} />
+          <Route path="budgeting-101" element={<Budgeting />} />
+          
 
 
 

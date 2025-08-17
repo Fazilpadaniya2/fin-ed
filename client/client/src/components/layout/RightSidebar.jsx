@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RightSidebar() {
   return (
-    <aside className="w-72 flex flex-col gap-4 p-4 bg-[var(--color-neutral-50)] text-[var(--color-neutral-900)] rounded-xl shadow-lg">
+    <aside className="w-72 sticky top-2 flex flex-col gap-4 p-4 bg-[var(--color-neutral-50)] text-[var(--color-neutral-900)] rounded-xl shadow-lg">
       {/* Unlock Leaderboards */}
       <div className="bg-[var(--color-neutral-100)] p-4 rounded-lg shadow-sm">
         <h3 className="font-semibold text-lg text-[var(--color-brand-700)] mb-2">

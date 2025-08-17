@@ -16,7 +16,7 @@ const items = [
 export default function Navbar() {
     const [activeId, setActiveId] = useState(0);
   return (
-    <aside className="h-screen w-[280px] bg-neutral-900 px-4 py-6 text-neutral-50">
+    <aside className="sticky top-0 z-50 h-screen w-[280px] bg-neutral-900 px-4 py-6 text-neutral-50">
       {/* brand */}
       <div className="px-2 pb-6">
         <div className="text-3xl font-extrabold tracking-tight leading-none">

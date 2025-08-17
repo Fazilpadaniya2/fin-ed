@@ -16,18 +16,7 @@ export default function Banking(){
 const[totalButtons, setTotalButtons] = useState(0);
 const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
-    async function fetchAct() {
-      try {
-        setLoading(true);
-
-        const { data } = await api.get(`/banking/1`);
-        setTotalButtons(data.data.length);
-      } catch (error) {
-        console.log(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
+    
 
     fetchAct();
   }, []);

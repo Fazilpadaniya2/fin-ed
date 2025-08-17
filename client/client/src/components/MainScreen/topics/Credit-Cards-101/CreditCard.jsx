@@ -1,12 +1,12 @@
 
 import { Outlet } from 'react-router-dom'
 
-export default function Crypto(){
+export default function CreditCard(){
 
 
   return(
     <>
-Crypto    </>
+Creditcard    </>
   )
 
 }
