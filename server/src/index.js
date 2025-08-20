@@ -21,7 +21,7 @@ app.use('/api/gettopics', topicRoutes);
 app.use('/api/posttopics', topicRoutes);
 
 //scenes
-app.use('/api/getscenes', sceneRoutes);
+app.use('/api/scenes/:topicid', sceneRoutes);
 app.use('/api/postscenes', sceneRoutes);
 
 //acts

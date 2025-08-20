@@ -2,7 +2,7 @@ import {getScenes, postScenes} from '../controllers/sceneController.js'
 
 import express from 'express'
 
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 
 
 router.get("/", getScenes);

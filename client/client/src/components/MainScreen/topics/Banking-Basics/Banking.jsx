@@ -8,7 +8,7 @@ import { useScenes } from '../../../../context/ScenesContext.jsx';
 export default function Banking(){
 
 
-const {scenes, loading, err} = useScenes();
+const {scenes, err, loading} = useScenes();
     
 const[totalButtons, setTotalButtons] = useState(0);
 const [activeIndex, setActiveIndex] = useState(0);

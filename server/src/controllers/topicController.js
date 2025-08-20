@@ -4,7 +4,6 @@ import {pool} from '../config/db.js'
  export const getTopics= async (req, res)=>{
 
     try{
-
         //we can pass the token to a middleware
         const {rows} = await pool.query('SELECT * FROM topics');
         console.log(rows + " ksdhds");

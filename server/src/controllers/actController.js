@@ -6,7 +6,7 @@ export const getActs = async (req, res) => {
     console.log("got the scene id " + sceneId);
     const actsOrder = req.params.actorder;
 
-    if(!Number.isInteger(sceneId) || sceneId <=0){
+    if(Number.isInteger(sceneId) ==false || sceneId <=0){
 
       return res.status(400).json({error: "invalid SceneId"});
     }
