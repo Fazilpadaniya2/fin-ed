@@ -1,12 +1,18 @@
+import { Link, useParams } from "react-router-dom";
 
+export default function SceneButton({topicId, number, title, scene_id }){
 
-export default function SceneButton({topicId, number, title }){
-
-  const active = true;
+  const {sceneid} = useParams();
+  const active = true;  
 
     return(<>
 {active ? (
-   <button type="button" aria-pressed="true"  className="relative grid place-items-center">
+     <Link
+      to={`scene/${scene_id}`}
+      role="button"
+      aria-pressed={active}
+      className="block"
+    >
     {/* outer ring */}
     <div className="p-2 rounded-full bg-[#F1F5F9]">
       {/* inner disc */}
@@ -24,9 +30,13 @@ export default function SceneButton({topicId, number, title }){
     </div>
     {/* base shadow */}
     <div className="pointer-events-none absolute bottom-[-6px] left-1/2 -translate-x-1/2 h-5 w-16 rounded-full bg-[#15803D]/20">Topic id:{topicId}</div>
-  </button>
-) : ( <button type="button" aria-pressed="false" className="relative grid place-items-center">
-  
+  </Link>
+) : (  <Link
+      to={`scene/${scene_id}`}
+      role="button"
+      aria-pressed={active}
+      className="block"
+    >
     <div className="p-2 rounded-full bg-[#F1F5F9]">
      
       <div className="grid place-items-center w-20 h-20 rounded-full bg-[#F1F5F9] shadow-[0_8px_0_rgba(0,0,0,0.15)]">
@@ -37,7 +47,8 @@ export default function SceneButton({topicId, number, title }){
       </div>
     </div>
     <div className="pointer-events-none absolute bottom-[-6px] left-1/2 -translate-x-1/2 h-5 w-16 rounded-full bg-black/15">Topic id:{topicId}</div>
-  </button>)}
+  </Link>
+)}
 </>)
 
 }

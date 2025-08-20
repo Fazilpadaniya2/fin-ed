@@ -6,9 +6,10 @@ import ProtectedRoute from "./ProtectedRoutes";
 import '../index.css'
 import Dashboard from '../pages/Dashboard/Index.jsx'
 import MainScreen from "../components/MainScreen/MainScreen.jsx"; 
-import Banking from "../components/MainScreen/topics/Banking-Basics/Banking.jsx";
-import CreditCard from "../components/MainScreen/topics/Credit-Cards-101/creditCard.jsx";
-import Budgeting from "../components/MainScreen/topics/Budgeting-101/Budgeting.jsx";
+
+import TopicLayout from "../components/MainScreen/TopicLayout.jsx";
+//import ScenePage from "../components/MainScreen/ScenePage.jsx";
+
 export default function AppRoutes() {
   return (
     <BrowserRouter>
@@ -28,9 +29,9 @@ export default function AppRoutes() {
         }
       >
         <Route index element={<MainScreen />} />
-        <Route path="banking-basics" element={<Banking />} />
-        <Route path="credit-cards-101" element={<CreditCard />} />
-        <Route path="budgeting-101" element={<Budgeting />} />
+        <Route path="topics/:topicid" element={<TopicLayout />}>
+           
+        </Route>
       </Route>
      
       </Routes>

@@ -25,6 +25,7 @@ return(
     {topics.map((t, idx) => (
             <TopicCard
               key={idx}
+              topic_id = {t.topic_id}
               name={t.topic_name}
               position={t.topic_position}
               totalScenes={t.total_scenes}

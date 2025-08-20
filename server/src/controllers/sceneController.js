@@ -4,27 +4,23 @@ export const getScenes= async (req, res)=>{
 
 
     try{
-  const topicsId = req.params.topicid;
-  console.log(topicsId + "it reached sceneController")
+        const topicsId = Number(req.params.topicid);
+        console.log(topicsId + "it reached sceneController")
 
-    if(topicsId==="all"){
 
-         const {rows} = await pool.query("SELECT * FROM scenes");
-        res.status(200).json({data: rows});
-         }else{
             //here i have changes topicSId to topicId
-           const topicId = Number(topicsId);
-            if(Number.isInteger(topicId)==false || topicId<=0){
+           
+            if(Number.isInteger(topicsId)==false || topicsId<=0){
                 res.status(400).json({error:"Invalid topicId"})
             }
             const sql = `
             SELECT * FROM scenes WHERE topic_id = $1 `;
 
-            const {rows} = await pool.query(sql, [topicId]);
+            const {rows} = await pool.query(sql, [topicsId]);
             console.log(rows + "coming from specific topic id")
             res.status(200).json({data: rows})
 
-        }
+        
     }catch(err){
 
         console.log(err);
