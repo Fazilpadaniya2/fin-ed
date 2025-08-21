@@ -8,7 +8,7 @@ import Dashboard from '../pages/Dashboard/Index.jsx'
 import MainScreen from "../components/MainScreen/MainScreen.jsx"; 
 
 import TopicLayout from "../components/MainScreen/TopicLayout.jsx";
-//import ScenePage from "../components/MainScreen/ScenePage.jsx";
+import ScenePage from "../components/MainScreen/ScenePage.jsx";
 
 export default function AppRoutes() {
   return (
@@ -30,7 +30,7 @@ export default function AppRoutes() {
       >
         <Route index element={<MainScreen />} />
         <Route path="topics/:topicid" element={<TopicLayout />}>
-           
+           <Route path="scenes/:scene_id" element={<ScenePage />} />
         </Route>
       </Route>
      

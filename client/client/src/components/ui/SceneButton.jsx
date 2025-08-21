@@ -8,7 +8,7 @@ export default function SceneButton({topicId, number, title, scene_id }){
     return(<>
 {active ? (
      <Link
-      to={`scene/${scene_id}`}
+      to={`scenes/${scene_id}`}
       role="button"
       aria-pressed={active}
       className="block"
@@ -32,7 +32,7 @@ export default function SceneButton({topicId, number, title, scene_id }){
     <div className="pointer-events-none absolute bottom-[-6px] left-1/2 -translate-x-1/2 h-5 w-16 rounded-full bg-[#15803D]/20">Topic id:{topicId}</div>
   </Link>
 ) : (  <Link
-      to={`scene/${scene_id}`}
+      to={`scenes/${scene_id}`}
       role="button"
       aria-pressed={active}
       className="block"

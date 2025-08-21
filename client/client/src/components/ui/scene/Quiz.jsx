@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export function Quiz({ question, options, onComplete, answer }) {
+export default function Quiz({ question, option_a, option_b, option_c, option_d, onComplete, answer }) {
   const [selected, setSelected] = useState(null);
 const [check, setCheck] = useState(null);
-
+const options = [option_a, option_b, option_c, option_d]
   function handleClick(e){
 
     setSelected(e.target.html);

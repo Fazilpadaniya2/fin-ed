@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Outlet } from "react-router-dom";
 import api from "../../lib/api";
-import { Quiz } from "../ui/scene/Quiz";
+import  Quiz  from "../ui/scene/Quiz.jsx";
+import  Video  from "../ui/scene/Video.jsx";
+import  Story  from "../ui/scene/Story.jsx";
+import { act } from "react";
 
-export default function ScenePage({ sceneId }) {
+export default function ScenePage( ) {
  
     const {scene_id} = useParams();
     const [acts, setActs] = useState([]);
-    const [currentAct, setCurrentAct]= useState(null);
     const [actIndex, setActIndex]= useState(0);
     const [loading, setLoading]= useState(false);
     const [err, setErr]= useState("");
@@ -19,10 +21,13 @@ export default function ScenePage({ sceneId }) {
         
         try{
             setLoading(true);
-            const {data} = await api.get(`/${scene_id}/all`);
+            const {data} = await api.get(`/scenes/${scene_id}/acts`);
             console.log("fetching succeful");
+            console.log(data.data);
             setActs(data.data);
-            setCurrentAct(acts[actIndex]);
+           // console.log(acts); this will show old value since setActs works
+            //can;t asign acts[index] because setActs is async 
+
         }catch(err){
             setErr(err.message)
         }finally{
@@ -35,9 +40,11 @@ export default function ScenePage({ sceneId }) {
     }, [])
 
     function handleNext(){
-        setActIndex(actIndex+1);
-        setCurrentAct(setActIndex);
+        setActIndex((prev) => prev + 1);
+        console.log(currentAct);
     }
+    const currentAct = acts[actIndex];
+    console.log(currentAct );
     
 
     if (loading) {
@@ -48,26 +55,35 @@ export default function ScenePage({ sceneId }) {
         
     }
   return (
-      <div className="max-w-2xl mx-auto mt-10">
-   
-      {currentAct.type === "story" && (
-        <Story content={currentAct.content} onComplete={handleNext} />
+      <>
+      <h1>hello</h1>
+      {currentAct && (
+          <div className="max-w-2xl mx-auto mt-10">
+      {currentAct.act_type === "story" && (
+        <Story content={currentAct.act_content} onComplete={handleNext} />
       )}
-    
-      {currentAct.type === "quiz" && (
+
+      {currentAct.act_type === "quiz" && (
         <Quiz
           question={currentAct.question}
-          options={currentAct.options}
-          answer={currentAct.answer} //check
+          option_a={currentAct.option_a}
+          option_b={currentAct.option_b}
+          option_c={currentAct.option_c}
+          option_d={currentAct.option_d}
+          answer={currentAct.answer}
           onComplete={handleNext}
         />
       )}
-       {currentAct.type === "quiz" && (
+
+      {currentAct.act_type === "video" && (
         <Video
-         url = {currentAct.url}
+          url={currentAct.act_content}
           onComplete={handleNext}
         />
       )}
     </div>
+  )}
+    <Outlet />
+    </>
   );
 }
