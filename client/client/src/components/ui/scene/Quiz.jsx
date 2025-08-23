@@ -1,17 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Quiz({ question, option_a, option_b, option_c, option_d, onComplete, answer }) {
   const [selected, setSelected] = useState(null);
 const [check, setCheck] = useState(null);
 const options = [option_a, option_b, option_c, option_d]
+
+console.log(answer);
+
   function handleClick(e){
+   setSelected(e.target.innerHTML);
 
-    setSelected(e.target.html);
+  if(e.target.innerHTML === answer){
+    console.log("here")
+    setCheck(true);
+   }else{
 
-    if(selected === answer){
-        setCheck(true);
-    }
+   setCheck(false);
+   }
+  
   }
+
+
+useEffect(() => {
+
+   setSelected(null);
+    setCheck(null);
+
+}, [ question, option_a])
+
+
+
   return (
     <div>
       {check == null && (

@@ -29,10 +29,13 @@ export default function AppRoutes() {
         }
       >
         <Route index element={<MainScreen />} />
-        <Route path="topics/:topicid" element={<TopicLayout />}>
-           <Route path="scenes/:scene_id" element={<ScenePage />} />
-        </Route>
-      </Route>
+         {/* Topic list page WITH sidebar/list */}
+  <Route path="topics/:topicid" element={<TopicLayout />} />
+
+  {/* Full-screen scene page (no TopicLayout) */}
+  <Route path="topics/:topicid/scenes/:scene_id" element={<ScenePage />} />
+</Route>
+     
      
       </Routes>
     </BrowserRouter>

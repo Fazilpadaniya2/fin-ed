@@ -43,19 +43,22 @@ if (err) return <h1>{err}</h1>
   return(
     <>
        <div className="flex flex-row">
-     {scenes.map((s, idx)=>(
+  {/* horizontal scroll container */}
+  <div className="flex flex-row gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800 px-2">
+    {scenes.map((s, idx) => (
       <SceneButton
-      key={s.scene_id}
-      scene_id = {s.scene_id}
-      topicId={s.topic_id}
-      number= {s.number}
-      title = {s.title}
+        key={s.scene_id}
+        scene_id={s.scene_id}
+        topicId={s.topic_id}
+        number={s.number}
+        title={s.title}
       />
-    ))
-     }
-     <Outlet />
-    </div>
+    ))}
+    
+  </div>
+</div>
  
+    <Outlet />
 </>
   )
 
