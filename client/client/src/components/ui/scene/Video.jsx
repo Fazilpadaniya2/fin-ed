@@ -5,7 +5,7 @@ export default function Story({ url, onComplete }) {
       <button
         onClick={onComplete}
         className="mt-4 px-4 py-2 rounded-lg bg-green-500 text-white"
-      >
+      > 
         Continue
       </button>
     </div>

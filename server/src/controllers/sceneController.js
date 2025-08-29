@@ -54,3 +54,40 @@ export const postScenes = async (req,res)=>{
         res.status(err.message);
     }
 }
+
+export const setSceneCompleted = async(req, res)=>{
+
+
+    try{
+
+        const scene_id = Number(req.params.sceneid);
+        const {is_completed} = req.body;
+
+        if(!Number.isInteger(scene_id) || scene_id<=0){
+            return res.status(400).json({error: 'scene_id is not a integer'});
+
+        }
+       
+        const sql = `
+        UPDATE scenes
+        SET is_completed = $1,
+        updated_at = NOW()
+        WHERE scene_id = $2 
+        RETURNING scene_id , is_completed
+        `;
+        
+       const {rows} =  await pool.query(sql, [is_completed, scene_id]);
+
+        if (rows.length === 0) {
+      return res.status(404).json({ error: 'Scene not found' });
+    }
+    return res.status(200).json({
+        data : rows[0],
+        message: 'scene id updated to complete'
+    })
+       
+    }catch(err){
+   return res.status(500).json({ error: 'Internal server error' });
+        console.log(err.message);
+    }
+}

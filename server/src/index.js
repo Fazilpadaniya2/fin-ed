@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes.js';
 import topicRoutes from './routes/topicRoutes.js';
 import sceneRoutes from './routes/sceneRoutes.js'; // must be created with Router({ mergeParams: true })
 import actRoutes from './routes/actRoutes.js';     // must be created with Router({ mergeParams: true })
+import sceneMetaRoutes from './routes/sceneMetaRoutes.js'
 
 const app = express();
 
@@ -26,7 +27,10 @@ app.use('/api/topics/:topicid/scenes', sceneRoutes);
 // Scene-specific (optional details)
 
 // Acts for a scene
-app.use('/api/scenes/:sceneId/acts', actRoutes);
+app.use('/api/scenes/:sceneid/acts', actRoutes);
+
+//posting scene is completed
+app.use('/api/scenes', sceneMetaRoutes);
 
 /** ---- Legacy aliases (optional; keeps your old frontend working while you migrate) ---- */
 app.use('/api/gettopics', topicRoutes);   // GET /api/gettopics -> GET /api/topics

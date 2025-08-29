@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Quiz({ question, option_a, option_b, option_c, option_d, onComplete, answer }) {
+export default function Quiz({ question, option_a, option_b, option_c, option_d, onComplete, answer, postCompleted }) {
   const [selected, setSelected] = useState(null);
 const [check, setCheck] = useState(null);
 const options = [option_a, option_b, option_c, option_d]
@@ -13,6 +13,8 @@ console.log(answer);
   if(e.target.innerHTML === answer){
     console.log("here")
     setCheck(true);
+    postCompleted(true);
+    
    }else{
 
    setCheck(false);

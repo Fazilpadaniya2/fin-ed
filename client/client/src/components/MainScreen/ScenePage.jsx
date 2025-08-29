@@ -41,6 +41,20 @@ export default function ScenePage( ) {
         fetchActs();
     }, [scene_id])
 
+
+    async function is_completed(a_boolean){
+
+
+      try{
+        console.log("trying to post " + a_boolean)
+
+        const {data} = await api.post(`/scenes/${scene_id}/completed`, { is_completed: a_boolean })
+        console.log(data.data)
+    }catch (err){
+      console.log(err.message);
+    }
+    
+    }
     const currentAct = acts[actIndex];
 
     function handleNext(){
@@ -78,6 +92,7 @@ export default function ScenePage( ) {
           option_d={currentAct.option_d}
           answer={currentAct.right_answer}
           onComplete={handleNext}
+          postCompleted = {is_completed}
         />
       )}
 
