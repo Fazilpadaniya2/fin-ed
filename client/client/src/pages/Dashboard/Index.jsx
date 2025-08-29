@@ -6,15 +6,15 @@ import { Outlet } from "react-router-dom";
 import { TopicsProvider } from "../../context/TopicsContext.jsx";
 export default function Dashboard() {
   return (
-    <div className="min-h-dvh flex bg-neutral-900 text-neutral-50">
-      <Navbar />
+    <div className="flex  h-screen">
+      <aside className="w-64 shrink-0"><Navbar /></aside>
 
-      <main className="flex-1 bg-neutral-50 text-neutral-900 p-6">
+      <main className="w-0 flex-1 min-w-0 overflow-x-hidden">
         <TopicsProvider>
            <Outlet />
         </TopicsProvider>
       </main>
-      <aside className="w-80 shrink-0 p-6">
+      <aside className="w-80 bg-neutral-900 shrink-0 p-6">
           <RightSidebar />
         </aside>
     </div>

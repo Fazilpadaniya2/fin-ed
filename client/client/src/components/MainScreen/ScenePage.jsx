@@ -61,6 +61,7 @@ export default function ScenePage( ) {
       if(actIndex+1 < acts.length){
       setActIndex((prev) => prev + 1);
     }else{
+      is_completed(true);
       navigate(`/topics/${topicid}`);
     }
     }

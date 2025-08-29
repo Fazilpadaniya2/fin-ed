@@ -13,7 +13,6 @@ console.log(answer);
   if(e.target.innerHTML === answer){
     console.log("here")
     setCheck(true);
-    postCompleted(true);
     
    }else{
 

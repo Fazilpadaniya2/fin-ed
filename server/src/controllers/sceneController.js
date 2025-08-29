@@ -91,3 +91,25 @@ export const setSceneCompleted = async(req, res)=>{
         console.log(err.message);
     }
 }
+
+export const getSceneCompleted = async (req, res) => {
+  try {
+    const sceneId = Number(req.params.sceneid);
+
+    if (!Number.isInteger(sceneId) || sceneId <= 0) {
+      return res.status(400).json({ error: "sceneid must be a positive integer" });
+    }
+
+    const sql = `SELECT scene_id, is_completed FROM scenes WHERE scene_id = $1`;
+    const { rows } = await pool.query(sql, [sceneId]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "Scene not found" });
+    }
+
+    return res.status(200).json({ data: rows[0] });
+  } catch (err) {
+    console.error("getSceneCompleted error:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
