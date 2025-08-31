@@ -60,6 +60,7 @@ export const setSceneCompleted = async(req, res)=>{
 
     try{
 
+        const user_id = req.user.user_id;
         const scene_id = Number(req.params.sceneid);
         const {is_completed} = req.body;
 
@@ -69,14 +70,17 @@ export const setSceneCompleted = async(req, res)=>{
         }
        
         const sql = `
-        UPDATE scenes
-        SET is_completed = $1,
-        updated_at = NOW()
-        WHERE scene_id = $2 
-        RETURNING scene_id , is_completed
+        INSERT INTO user_scene_progress (user_id, scene_id, is_completed, completed_at)
+        VALUES ($1,$2,$3, CASE WHEN $3 THEN NOW() ELSE NULL END)
+          ON CONFLICT (user_id, scene_id)
+        DO UPDATE SET
+        is_completed = EXCLUDED.is_completed,
+        completed_at = CASE WHEN EXCLUDED.is_completed THEN NOW() ELSE NULL END
+
+        RETURNING user_id, scene_id, is_completed
         `;
         
-       const {rows} =  await pool.query(sql, [is_completed, scene_id]);
+       const {rows} =  await pool.query(sql, [user_id, scene_id, is_completed]);
 
         if (rows.length === 0) {
       return res.status(404).json({ error: 'Scene not found' });
@@ -94,17 +98,18 @@ export const setSceneCompleted = async(req, res)=>{
 
 export const getSceneCompleted = async (req, res) => {
   try {
+    const user_id = req.user.user_id;
     const sceneId = Number(req.params.sceneid);
 
     if (!Number.isInteger(sceneId) || sceneId <= 0) {
       return res.status(400).json({ error: "sceneid must be a positive integer" });
     }
 
-    const sql = `SELECT scene_id, is_completed FROM scenes WHERE scene_id = $1`;
-    const { rows } = await pool.query(sql, [sceneId]);
+    const sql = `SELECT scene_id, is_completed FROM user_scene_progress WHERE scene_id = $1 AND user_id =$2`;
+    const { rows } = await pool.query(sql, [sceneId, user_id]);
 
     if (rows.length === 0) {
-      return res.status(404).json({ error: "Scene not found" });
+      return res.status(200).json({ scene_id: sceneId, is_completed: false, completed_at: null });
     }
 
     return res.status(200).json({ data: rows[0] });
