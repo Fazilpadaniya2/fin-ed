@@ -8,7 +8,7 @@ export const getScenes= async (req, res)=>{
         console.log(topicsId + "it reached sceneController")
 
 
-            //here i have changes topicSId to topicId
+            
            
             if(Number.isInteger(topicsId)==false || topicsId<=0){
                 res.status(400).json({error:"Invalid topicId"})

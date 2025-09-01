@@ -32,10 +32,10 @@ app.use('/api/scenes/:sceneid/acts', actRoutes);
 //posting scene is completed
 app.use('/api/scenes', sceneMetaRoutes);
 
-/** ---- Legacy aliases (optional; keeps your old frontend working while you migrate) ---- */
+
 app.use('/api/gettopics', topicRoutes);   // GET /api/gettopics -> GET /api/topics
 app.use('/api/posttopics', topicRoutes);  // POST /api/posttopics -> POST /api/topics
-/** ------------------------------------------------------------------------------------- */
+
 
 const PORT = Number(process.env.PORT) || 3000;
 app.listen(PORT, () => console.log('running on ' + PORT));

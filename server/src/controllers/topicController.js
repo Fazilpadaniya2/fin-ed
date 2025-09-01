@@ -20,7 +20,7 @@ import {pool} from '../config/db.js'
     const {slug, name, scenes} = req.body;
     try{
 
-        //we can pass the token to a middleware
+        // can pass the token to a middleware
         const {rows} = await pool.query('INSERT into topics (slug, topic_name, total_scenes) VALUES ($1,$2,$3) RETURNING *', [slug, name, scenes]);
         console.log(rows[0]);
         res.status(201).json({data: rows[0]})

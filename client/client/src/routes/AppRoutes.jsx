@@ -32,7 +32,7 @@ export default function AppRoutes() {
          {/* Topic list page WITH sidebar/list */}
   <Route path="topics/:topicid" element={<TopicLayout />} />
 
-  {/* Full-screen scene page (no TopicLayout) */}
+  {/* Full-screen scene page */}
   <Route path="topics/:topicid/scenes/:scene_id" element={<ScenePage />} />
 </Route>
      
