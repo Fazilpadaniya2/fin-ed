@@ -4,12 +4,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const items = [
-  { to: "/dashboard/learn",         icon: "🏠", label: "LEARN" },
-  { to: "/dashboard/leaderboards",  icon: "🛡️", label: "LEADERBOARDS" },
-  { to: "/dashboard/quests",        icon: "🎯", label: "QUESTS" },
-  { to: "/dashboard/shop",          icon: "🛍️", label: "SHOP" },
-  { to: "/dashboard/profile",       icon: "👤", label: "PROFILE" },
-  { to: "/dashboard/more",          icon: "⋯", label: "MORE" },
+  { to: "/learn",         icon: "🏠", label: "LEARN" },
+  { to: "/quests",        icon: "🎯", label: "QUESTS" },
+  { to: "/shop",          icon: "🛍️", label: "SHOP" },
+  { to: "/profile",       icon: "👤", label: "PROFILE" },
+  { to: "/more",          icon: "⋯", label: "MORE" },
 ];
 
 

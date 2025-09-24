@@ -10,6 +10,7 @@ import MainScreen from "../components/MainScreen/MainScreen.jsx";
 import TopicLayout from "../components/MainScreen/TopicLayout.jsx";
 import ScenePage from "../components/MainScreen/ScenePage.jsx";
 
+
 export default function AppRoutes() {
   return (
     <BrowserRouter>
@@ -28,6 +29,15 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       >
+       <Route
+        path="/leaderboard"
+        element={
+          <ProtectedRoute>
+          
+          </ProtectedRoute>
+        }
+      ></Route> 
+
         <Route index element={<MainScreen />} />
          {/* Topic list page WITH sidebar/list */}
   <Route path="topics/:topicid" element={<TopicLayout />} />

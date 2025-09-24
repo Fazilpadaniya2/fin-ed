@@ -18,6 +18,7 @@
         [email, username]
         );
         if (exists.rows.length) {
+            console.log(res.error)
         return res.status(409).json({ error: 'username or email already in use' });
         }
 
@@ -29,7 +30,7 @@
             const sql = `
             INSERT INTO users (username, email, password_hash)
             VALUES ($1, $2, $3)
-            RETURNING id, username, email, role, created_at
+            RETURNING user_id, username, email, role, created_at
             `;
             //posting on db
             const {rows} = await pool.query(sql, [username, email, hashedPassword]);
@@ -75,7 +76,7 @@
                 res.status(200).json({ token, user: payload });
             } catch (err) {
                 console.log("error");
-                res.status(500).json('Internal server error');
+                res.status(500).json(`${err.message}`);
             }
         
         
