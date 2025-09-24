@@ -4,23 +4,24 @@
 
 
 
-        export const registerRoute = async (req, res)=>{
+        export const registerRoute = async (req, res, next)=>{
         
         try{
             
             //checking if the user already exists
             const { username, email, password } = req.body;
             if (!username || !email || !password) {
-        return res.status(400).json({ error: 'username, email, and password are required' });
-        }
-        const exists = await pool.query(
-        'SELECT 1 FROM users WHERE email=$1 OR username=$2 LIMIT 1',
-        [email, username]
-        );
-        if (exists.rows.length) {
-            console.log(res.error)
-        return res.status(409).json({ error: 'username or email already in use' });
-        }
+            return res.status(400).json({ error: 'username, email, and password are required' });
+              }
+            const exists = await pool.query(
+            'SELECT 1 FROM users WHERE email=$1 OR username=$2 LIMIT 1',
+            [email, username]
+             );
+            
+             if (exists.rows.length) {
+                console.log(res.error)
+            return res.status(409).json({ error: 'username or email already in use' });
+            }
 
             //hashing pass
             const salt = await  bcrypt.genSalt(10);
@@ -38,19 +39,25 @@
         //generating a jwt token for token puposes lol
             const user = rows[0];
 
-            const payload = { id: user.id, username: user.username, role: user.role };
+            const payload = { id: user.user_id, username: user.username, role: user.role };
             const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-            res.status(201).json({ token, user: payload });
-            }
+            //res.local is a request based scope built to store data until a request is finished //ITS SAFE 
+            res.locals.response ={
+                status : 201,
+                body: {token, user: payload}
+            };
+            next();
+          //  res.status(201).json({ token, user: payload });
+        }
             catch(err){
                 if (err.code === '23505') {
         return res.status(409).json({ error: 'username or email already in use' });
         }
-        console.error('register error:', err);
-        return res.status(500).json({ error: 'server error' });
-    }
-            }
+        console.error('register error:', err.message);
+        return res.status(500).json({ error: err.message });
+             }
+  }
         
 
         export const loginRoute = async (req, res) => {
