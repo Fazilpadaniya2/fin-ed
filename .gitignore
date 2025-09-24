@@ -18,7 +18,7 @@ coverage/
 .env
 *.env
 server/.env
-infra/docker-compose.yml
+infra/.env
 
 # Editor files
 .vscode/
