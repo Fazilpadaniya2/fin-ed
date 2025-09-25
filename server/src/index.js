@@ -8,6 +8,7 @@ import topicRoutes from './routes/topicRoutes.js';
 import sceneRoutes from './routes/sceneRoutes.js'; // must be created with Router({ mergeParams: true })
 import actRoutes from './routes/actRoutes.js';     // must be created with Router({ mergeParams: true })
 import sceneMetaRoutes from './routes/sceneMetaRoutes.js'
+import user_profile from './routes/user_profile.js'
 
 const app = express();
 
@@ -35,6 +36,9 @@ app.use('/api/scenes', sceneMetaRoutes);
 
 app.use('/api/gettopics', topicRoutes);   // GET /api/gettopics -> GET /api/topics
 app.use('/api/posttopics', topicRoutes);  // POST /api/posttopics -> POST /api/topics
+
+//for user_profile update
+app.use('/api/updateprofile', user_profile)
 
 
 const PORT = Number(process.env.PORT) || 3000;
