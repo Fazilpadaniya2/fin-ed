@@ -4,12 +4,13 @@ import Home from "../pages/Home";
 import Login from "../pages/Auth/Login"
 import ProtectedRoute from "./ProtectedRoutes";
 import '../index.css'
-import Dashboard from '../pages/Dashboard/Index.jsx'
+import Dashboard from '../pages/Dashboard/Index.jsx';
 import MainScreen from "../components/MainScreen/MainScreen.jsx"; 
 
 import TopicLayout from "../components/MainScreen/TopicLayout.jsx";
 import ScenePage from "../components/MainScreen/ScenePage.jsx";
 
+import Profile from "../pages/profile.jsx";
 
 export default function AppRoutes() {
   return (
@@ -30,10 +31,10 @@ export default function AppRoutes() {
         }
       >
        <Route
-        path="/leaderboard"
+        path="/profile"
         element={
           <ProtectedRoute>
-          
+          <Profile />
           </ProtectedRoute>
         }
       ></Route> 
