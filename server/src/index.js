@@ -9,6 +9,7 @@ import sceneRoutes from './routes/sceneRoutes.js'; // must be created with Route
 import actRoutes from './routes/actRoutes.js';     // must be created with Router({ mergeParams: true })
 import sceneMetaRoutes from './routes/sceneMetaRoutes.js'
 import user_profile from './routes/user_profile.js'
+import { requireAuth } from './middleware/auth.js';
 
 const app = express();
 
@@ -38,7 +39,8 @@ app.use('/api/gettopics', topicRoutes);   // GET /api/gettopics -> GET /api/topi
 app.use('/api/posttopics', topicRoutes);  // POST /api/posttopics -> POST /api/topics
 
 //for user_profile update
-app.use('/api/updateprofile', user_profile)
+app.use('/api/updateprofile', user_profile);
+app.use('/api/profile', requireAuth, user_profile);
 
 
 const PORT = Number(process.env.PORT) || 3000;

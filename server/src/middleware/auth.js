@@ -7,6 +7,7 @@
 
     try {
       req.user = jwt.verify(token, process.env.JWT_SECRET);
+      console.log("checking if auth is required");
       next();
     } catch {
       res.status(401).json({ error: 'invalid token' });

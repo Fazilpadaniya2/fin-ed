@@ -60,3 +60,18 @@ try{
     console.log("from trying to update user_profile "+ err.message);
 }
 }
+
+export const get_user_profile = async(req, res)=>{
+
+    try{
+        //write sql here call pool  and we are good to go
+        const user_id = req.user;
+        console.log();
+        
+        return res.json(user_id);
+    }catch(err){
+
+        console.log(err);
+        res.send(err.message);
+    }
+}

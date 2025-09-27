@@ -52,7 +52,6 @@ function PencilIcon({ className }) {
 
 export default function UserProfileCard() {
 
-  
     const [data, setData] = useState({
     name: "",
     handle: "",
@@ -67,87 +66,25 @@ export default function UserProfileCard() {
       top3Finishes: 0,
     },
   });
- useEffect(async () => {
+useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      console.log("fetching");
+      const { data } = await api.get("/profile");
+        console.log(data.data, "we are here");
+        console.log(data);
+      } catch (err) {
+        console.error("Error fetching profile:", err);
+      }
+    };
 
-  const {data} = await api.get('/profile')
-
-  console.log(data);
-    return;
-  }, [data]);
+    fetchProfile();
+  }, []);
 
 
   return (
     <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white shadow-sm">
-      {/* Banner */}
-      <div className="relative h-40 w-full rounded-t-3xl bg-[#d8eefb]">
-        <button
-          type="button"
-          className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white/90 px-3 py-2 text-sm text-slate-700 shadow-sm hover:bg-white"
-          aria-label="Edit banner"
-        >
-          <PencilIcon className="h-4 w-4" />
-          Edit
-        </button>
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="h-24 w-24 rounded-full border-2 border-dashed border-[#8dc8ef] opacity-70" />
-        </div>
-      </div>
-
-      {/* Avatar */}
-      <AvatarPlaceholder />
-
-      {/* Header */}
-      <div className="px-6 pb-6">
-        <div className="mt-2 flex items-center gap-2">
-          <h1 className="text-2xl font-bold text-slate-900">{data.name}</h1>
-        </div>
-        <div className="mt-1 text-slate-500">{data.handle}</div>
-        <div className="mt-1 flex items-center gap-2 text-slate-500">
-          <span>{data.joinedText}</span>
-          {data.localeFlag ? (
-            <span className="ml-1 inline-flex items-center justify-center rounded-md bg-slate-100 px-2 py-0.5 text-sm">
-              {data.localeFlag}
-            </span>
-          ) : null}
-        </div>
-
-        {/* Social counts */}
-        <div className="mt-4 flex gap-6 text-sm">
-          <button className="text-blue-600 hover:underline" type="button">
-            {data.following} Following
-          </button>
-          <button className="text-blue-600 hover:underline" type="button">
-            {data.followers} Follower{data.followers === 1 ? "" : "s"}
-          </button>
-        </div>
-
-        <hr className="my-6 border-slate-200" />
-
-        {/* Statistics */}
-        <h2 className="text-xl font-semibold text-slate-900">Statistics</h2>
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatBox
-            label="Day streak"
-            value={data.stats.streakDays}
-            icon={<span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 text-slate-600">🔥</span>}
-          />
-          <StatBox
-            label="Total XP"
-            value={data.stats.totalXp}
-            icon={<span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 text-slate-600">⚡️</span>}
-          />
-          <StatBox
-            label="Current league"
-            value={data.stats.currentLeagueLabel}
-            icon={<span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 text-slate-600">🏆</span>}
-          />
-          <StatBox
-            label="Top 3 finishes"
-            value={data.stats.top3Finishes}
-            icon={<span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 text-slate-600">🥉</span>}
-          />
-        </div>
-      </div>
+      kuch
     </div>
   );
 }
