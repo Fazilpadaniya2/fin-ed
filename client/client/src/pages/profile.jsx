@@ -54,16 +54,16 @@ export default function UserProfileCard() {
 
     const [data, setData] = useState({
     name: "",
-    handle: "",
+    handle: "", 
     joinedText: "",
     following: 1,
     followers: 1,
     localeFlag: "🇨🇦",
     stats: {
-      streakDays: 0,
-      totalXp: 0,
-      currentLeagueLabel: "",
-      top3Finishes: 0,
+        streakDays: 0,
+        totalXp: 0,
+        currentLeagueLabel: "",
+        top3Finishes: 0,
     },
   });
 useEffect(() => {
