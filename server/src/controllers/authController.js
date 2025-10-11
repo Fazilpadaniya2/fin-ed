@@ -14,12 +14,11 @@
             return res.status(400).json({ error: 'username, email, and password are required' });
               }
             const exists = await pool.query(
-            'SELECT 1 FROM users WHERE email=$1 OR username=$2 LIMIT 1',
+            'SELECT * FROM users WHERE email=$1 OR user_name=$2 LIMIT 1',   
             [email, username]
              );
             
              if (exists.rows.length) {
-                console.log(res.error)
             return res.status(409).json({ error: 'username or email already in use' });
             }
 
@@ -29,7 +28,7 @@
 
             //sql query
             const sql = `
-            INSERT INTO users (username, email, password_hash)
+            INSERT INTO users (user_name, email, password)
             VALUES ($1, $2, $3)
             RETURNING user_id, username, email, role, created_at
             `;
@@ -39,7 +38,7 @@
         //generating a jwt token for token puposes lol
             const user = rows[0];
 
-            const payload = { id: user.user_id, username: user.username, role: user.role };
+            const payload = { id: user.user_id, username: user.user_name, role: user.role };
             const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
 
             //res.local is a request based scope built to store data until a request is finished //ITS SAFE 
@@ -49,8 +48,7 @@
             };
             next();
           //  res.status(201).json({ token, user: payload });
-        }
-            catch(err){
+        } catch(err){
                 if (err.code === '23505') {
         return res.status(409).json({ error: 'username or email already in use' });
         }
@@ -72,12 +70,12 @@
                     return res.status(401).json('invalid credentials');
                 }
 
-                const ok = await bcrypt.compare(password, user.password_hash);
+                const ok = await bcrypt.compare(password, user.password);
                 if (!ok) {
                     return res.status(401).json('invalid password');
                 }
 
-                const payload = { id: user.id, username: user.username, email: user.email, role: user.role };
+                const payload = { id: user.user_id, username: user.user_name, email: user.email, role: user.role };
                 const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
 
                 res.status(200).json({ token, user: payload });
