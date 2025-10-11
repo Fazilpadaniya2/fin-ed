@@ -1,8 +1,9 @@
         import {pool} from '../config/db.js'
         import bcrypt from 'bcrypt'
         import jwt from 'jsonwebtoken';
+        const { data: signUp } = await supabase.auth.signUp({ email, password });
 
-
+console.log('DB url host snippet:', (process.env.SUPABASE_URL || '').split('@')[1]?.split('/')[0]); 
 
         export const registerRoute = async (req, res, next)=>{
         
@@ -30,7 +31,7 @@
             const sql = `
             INSERT INTO users (user_name, email, password)
             VALUES ($1, $2, $3)
-            RETURNING user_id, username, email, role, created_at
+            RETURNING user_id, user_name, email, role
             `;
             //posting on db
             const {rows} = await pool.query(sql, [username, email, hashedPassword]);
