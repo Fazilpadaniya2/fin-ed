@@ -15,7 +15,7 @@ export const post_user_profile = async(req,res)=>{
        return res.status(400).json({message: "something is missing"});
     }
     
-    const {rows} = await pool.query('INSERT INTO user_profile(user_id, tag, streak_count, xp, username, grade) VALUES ($1,$2,$3,$4,$5, $6) RETURNING *', [
+    const {rows} = await pool.query('INSERT INTO user_profile(user_id, tag, streak_count, xp, user_name, grade) VALUES ($1,$2,$3,$4,$5, $6) RETURNING *', [
        id, tag, streak_count, xp, username, grade
     ]
 )

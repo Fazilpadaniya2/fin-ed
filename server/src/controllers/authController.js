@@ -1,9 +1,6 @@
         import {pool} from '../config/db.js'
         import bcrypt from 'bcrypt'
         import jwt from 'jsonwebtoken';
-        const { data: signUp } = await supabase.auth.signUp({ email, password });
-
-console.log('DB url host snippet:', (process.env.SUPABASE_URL || '').split('@')[1]?.split('/')[0]); 
 
         export const registerRoute = async (req, res, next)=>{
         
@@ -14,6 +11,7 @@ console.log('DB url host snippet:', (process.env.SUPABASE_URL || '').split('@')[
             if (!username || !email || !password) {
             return res.status(400).json({ error: 'username, email, and password are required' });
               }
+              console.log("asked if the user exists")
             const exists = await pool.query(
             'SELECT * FROM users WHERE email=$1 OR user_name=$2 LIMIT 1',   
             [email, username]
@@ -28,6 +26,8 @@ console.log('DB url host snippet:', (process.env.SUPABASE_URL || '').split('@')[
             const hashedPassword = await bcrypt.hash(password, salt);
 
             //sql query
+             console.log("going to register")
+
             const sql = `
             INSERT INTO users (user_name, email, password)
             VALUES ($1, $2, $3)
@@ -35,6 +35,7 @@ console.log('DB url host snippet:', (process.env.SUPABASE_URL || '').split('@')[
             `;
             //posting on db
             const {rows} = await pool.query(sql, [username, email, hashedPassword]);
+             console.log("returned from databse")
 
         //generating a jwt token for token puposes lol
             const user = rows[0];
@@ -47,7 +48,7 @@ console.log('DB url host snippet:', (process.env.SUPABASE_URL || '').split('@')[
                 status : 201,
                 body: {token, user: payload}
             };
-            next();
+            next()
           //  res.status(201).json({ token, user: payload });
         } catch(err){
                 if (err.code === '23505') {

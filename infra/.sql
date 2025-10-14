@@ -26,7 +26,7 @@ create table  scenes (
 
 CREATE INDEX  idx_scenes_topic_pos ON scenes(topic_id, position);
 
--- ACTS
+
 create table  acts (
   act_id            bigserial PRIMARY KEY,
   scene_id          bigint NOT NULL REFERENCES scenes(scene_id) ON DELETE CASCADE,
@@ -68,3 +68,19 @@ create table  user_progress (
 );
 
 CREATE INDEX  idx_progress_user_last ON user_progress(user_id, last_seen_at);
+
+alter table public.users alter column user_id set default gen_random_uuid();
+
+
+delete from public.acts;
+delete from public.scenes;
+delete from public.topics where slug in ('budgeting-101');
+
+create table user_profile(
+  user_id uuid references users(user_id),
+  tag text default 'noob',
+  streak_count int default 0,
+  xp int default 0,
+  user_name text references users(user_name),
+  grade int default 0
+)
