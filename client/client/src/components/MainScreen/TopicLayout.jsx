@@ -2,15 +2,16 @@ import { Outlet, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../lib/api.js";
 import SceneButton from "../ui/SceneButton.jsx";
-s
+
 export default function Topics() {
   const [scenes, setScenes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const { topicid } = useParams();
 
-  useEffect(async () => {
+  useEffect(() => {
     
+    async function getScenes(){
       try {
         setLoading(true);
         const { data } = await api.get(`/topics/${topicid}/scenes`);
@@ -20,6 +21,9 @@ export default function Topics() {
       } finally {
         setLoading(false);
       }
+    }
+
+    getScenes();
   }, [topicid]);
 
   if (loading) return <h1>Loading…</h1>;

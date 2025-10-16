@@ -24,7 +24,7 @@ export default function ScenePage( ) {
             setLoading(true);
             const {data} = await api.get(`/scenes/${scene_id}/acts`);
             console.log("fetching succeful");
-            console.log(data.data);
+            console.log(data.data + "from line 27 in scenePage");
             setActs(data.data);
             setActIndex(0);
            // console.log(acts); this will show old value since setActs works
