@@ -6,7 +6,7 @@ import {pool} from '../config/db.js'
     try{
         //we can pass the token to a middleware
         const {rows} = await pool.query('SELECT * FROM topics');
-        console.log(rows + " ksdhds");
+        console.log(rows + " coming from line 9 topicControllers.js");
         res.status(200).json({data: rows})
     }catch(err){
 

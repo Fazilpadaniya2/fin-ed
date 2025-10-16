@@ -35,8 +35,7 @@ app.use('/api/scenes/:sceneid/acts', actRoutes);
 app.use('/api/scenes', sceneMetaRoutes);
 
 
-app.use('/api/gettopics', topicRoutes);   // GET /api/gettopics -> GET /api/topics
-app.use('/api/posttopics', topicRoutes);  // POST /api/posttopics -> POST /api/topics
+
 
 //for user_profile update
 app.use('/api/updateprofile', user_profile);

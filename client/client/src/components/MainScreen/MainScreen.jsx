@@ -16,7 +16,7 @@ export default function MainScreen() {
           <TopicCard
             key={t.topic_id}
             topic_id={t.topic_id}
-            name={t.topic_name}
+            name={t.slug}
             position={t.topic_position}
             totalScenes={t.total_scenes}
             status={t.is_active}

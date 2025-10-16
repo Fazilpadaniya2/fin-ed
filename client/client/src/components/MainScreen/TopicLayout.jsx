@@ -2,27 +2,24 @@ import { Outlet, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../lib/api.js";
 import SceneButton from "../ui/SceneButton.jsx";
-
+s
 export default function Topics() {
   const [scenes, setScenes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const { topicid } = useParams();
 
-  useEffect(() => {
-    let alive = true;
-    (async () => {
+  useEffect(async () => {
+    
       try {
         setLoading(true);
         const { data } = await api.get(`/topics/${topicid}/scenes`);
-        if (alive) setScenes(data?.data ?? []);
+         setScenes(data?.data ?? []);
       } catch (e) {
-        if (alive) setErr(e.message ?? "Failed to load scenes");
+        setErr(e.message ?? "Failed to load scenes");
       } finally {
-        if (alive) setLoading(false);
+        setLoading(false);
       }
-    })();
-    return () => { alive = false; };
   }, [topicid]);
 
   if (loading) return <h1>Loading…</h1>;

@@ -70,7 +70,7 @@ export const setSceneCompleted = async(req, res)=>{
         }
        
         const sql = `
-        INSERT INTO user_scene_progress (user_id, scene_id, is_completed, completed_at)
+        INSERT INTO user_progress (user_id, scene_id, is_completed, completed_at)
         VALUES ($1,$2,$3, CASE WHEN $3 THEN NOW() ELSE NULL END)
           ON CONFLICT (user_id, scene_id)
         DO UPDATE SET
@@ -105,7 +105,7 @@ export const getSceneCompleted = async (req, res) => {
       return res.status(400).json({ error: "sceneid must be a positive integer" });
     }
 
-    const sql = `SELECT scene_id, is_completed FROM user_scene_progress WHERE scene_id = $1 AND user_id =$2`;
+    const sql = `SELECT scene_id, is_completed FROM user_progress WHERE scene_id = $1 AND user_id =$2`;
     const { rows } = await pool.query(sql, [sceneId, user_id]);
 
     if (rows.length === 0) {

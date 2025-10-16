@@ -18,9 +18,9 @@ useEffect(() => {
   async function getTopics(){
 
       try{
-      const {data} = await api.get('/gettopics');
+      const {data} = await api.get('/topics');
  setTopics( data.data);
-  console.log(data.data);
+  console.log(data.data, "coming from line 23 Topiccontext.jsx");
   setLoading(false);
   }catch(err){
       setErr(err.message);

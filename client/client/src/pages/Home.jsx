@@ -1,7 +1,7 @@
 
 function Home() {
     
-    return(<>hpme</>)
+    return(<>Home</>)
 }
 
 export default Home;
