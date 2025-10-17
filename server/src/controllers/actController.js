@@ -16,12 +16,12 @@ export const getActs = async (req, res) => {
 
       const sqlAll = `
       SELECT 
-      a.act_id, a.scene_id, a.position, a.act_type, a.act_content,
+      a.act_id, a.scene_id, a.position, a.act_type, a.story_description,
       q.question, q.option_a, q.option_b, q.option_c, q.option_d, q.right_answer
       FROM acts a
       LEFT JOIN questions q ON q.act_id = a.act_id AND  a.act_type='quiz'
       WHERE a.scene_id = $1
-      ORDER BY a.act_order; `
+      ORDER BY a.position; `
 
       const {rows} = await pool.query(sqlAll, [sceneId]);
       

@@ -81,7 +81,7 @@ export default function ScenePage( ) {
       {currentAct && (
           <div className="max-w-2xl mx-auto mt-10">
       {currentAct.act_type === "story" && (
-        <Story content={currentAct.act_content} onComplete={handleNext} />
+        <Story content={currentAct.story_description} onComplete={handleNext} />
       )}
 
       {currentAct.act_type === "quiz" && (
@@ -99,7 +99,7 @@ export default function ScenePage( ) {
 
       {currentAct.act_type === "video" && (
         <Video
-          url={currentAct.act_content}
+          url={currentAct.story_description}
           onComplete={handleNext}
         />
       )}
