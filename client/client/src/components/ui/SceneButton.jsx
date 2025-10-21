@@ -6,19 +6,8 @@ export default function SceneButton({ topicId, number, title, scene_id }) {
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-    let alive = true;
-    (async () => {
-      try {
-        const res = await api.get(`/scenes/${scene_id}/completed`);
-        // Backend: { data: { scene_id, is_completed } }
-        const isDone = Boolean(res.data.data.is_completed);
-        if (alive) setCompleted(isDone);
-      } catch (err) {
-        if (alive) setCompleted(false);
-      }
-    })();
-    return () => { alive = false; };
-  }, [scene_id]);
+    
+  });
 
   const cardClass = completed
     ? "relative flex items-center gap-4 rounded-2xl bg-gradient-to-b from-slate-700 to-slate-800 p-3 ring-1 ring-emerald-500/30 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-emerald-400/60"
