@@ -32,3 +32,19 @@ import {pool} from '../config/db.js'
 
 }
 
+export const post_user_topics_progress = async (req,res)=>{
+   const{userId, topicId} = req.params;
+   const{status} = req.body;
+     if(status=="continue"){
+   try{
+
+  
+    await pool.query('INSERT into user_topic_progress(user_id, topic_id) VALUES($1,$2)',[userId, topicId])
+    res.status(201);
+    console.log("coming from topicController postTopicProgress updated ✅");
+   }catch(err){
+    console.log(err.message + "coming from topicController, postTopicProgress Update nhi hua");
+   }
+}
+}
+

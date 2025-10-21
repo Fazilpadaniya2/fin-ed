@@ -3,17 +3,32 @@ import banking from '../../assets/images/banking.svg';
 import creditCard from '../../assets/images/credit-card.svg';
 import budgeting from '../../assets/images/budgeting.svg';
 import { Link } from 'react-router-dom';
-
+import api from '../../lib/api';
 export default function TopicCard({ name, position, totalScenes, status, topic_id }) {
   // pick the illustration
   let svg = null;
-  if (name === "Banking Basics") svg = banking;
-  else if (name === "Credit Cards 101") svg = creditCard;
-  else if (name === "Budgeting 101") svg = budgeting;
+  if (name === "banking-basics") svg = banking;
+  else if (name === "credit-cards") svg = creditCard;
+  else if (name === "budgeting-101") svg = budgeting;
 
   // label
   const startOrContinue = status === "ACTIVE" ? "continue" : "start";
 
+  const handleCountinue = async()=>{
+    
+    try{
+    const stored = localStorage.getItem("user");
+      if(stored){
+      const parsed = JSON.parse(stored);
+      const user_id = parsed.id
+      
+      api.post(`/topics/${user_id}/${topic_id}/continue`, { status: "continue" } )
+      }
+    }catch(err){
+      console.log(err.message + "coming from line 27 of topic_card")
+    }
+    
+  }
   return (
     <div className="mx-auto max-w-5xl p-6 md:p-10">
       <section className="relative overflow-hidden rounded-3xl bg-white/80 ring-1 ring-black/5 p-6 md:p-10">
@@ -45,7 +60,7 @@ export default function TopicCard({ name, position, totalScenes, status, topic_i
 
             {/* ✅ Route to TopicLayout at /topics/:topicid (relative to the Dashboard shell) */}
             <Link to={`topics/${topic_id}`}>
-              <button
+              <button onClick={handleCountinue}
                 className="mt-8 inline-flex items-center justify-center rounded-2xl bg-[var(--color-brand-500)] px-8 py-4 text-lg font-bold text-white shadow-sm shadow-black/10 transition hover:bg-[var(--color-brand-600)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-brand-100)]"
               >
                 {startOrContinue}
@@ -55,7 +70,7 @@ export default function TopicCard({ name, position, totalScenes, status, topic_i
 
           <div className="relative">
             <div className="ml-auto max-w-sm rounded-3xl bg-white p-5 text-xl font-semibold text-[var(--color-neutral-900)] ring-1 ring-black/5">
-              {status}
+              {status} Active
             </div>
 
             <img src={svg} alt="" />
