@@ -70,7 +70,7 @@ export default function TopicCard({ name, position, totalScenes, status, topic_i
 
           <div className="relative">
             <div className="ml-auto max-w-sm rounded-3xl bg-white p-5 text-xl font-semibold text-[var(--color-neutral-900)] ring-1 ring-black/5">
-              {status} Active
+              {status ? "inProgress" : "yet to start"} 
             </div>
 
             <img src={svg} alt="" />
