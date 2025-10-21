@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 app.use('/api/auth', authRoutes);
 
 // Topics
-app.use('/api/topics', topicRoutes);
+app.use('/api/topics',requireAuth, topicRoutes);
 
 // get all Scenes  a topic (list/create)
 app.use('/api/topics/:topicid/scenes', sceneRoutes);

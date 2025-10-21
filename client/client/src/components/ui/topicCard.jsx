@@ -12,7 +12,7 @@ export default function TopicCard({ name, position, totalScenes, status, topic_i
   else if (name === "budgeting-101") svg = budgeting;
 
   // label
-  const startOrContinue = status === "ACTIVE" ? "continue" : "start";
+  const startOrContinue = status === "active" ? "continue" : "start";
 
   const handleCountinue = async()=>{
     

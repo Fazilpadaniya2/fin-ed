@@ -3,14 +3,22 @@ import {pool} from '../config/db.js'
 
  export const getTopics= async (req, res)=>{
 
+    const {id} = req.user;
     try{
         //we can pass the token to a middleware
-        const {rows} = await pool.query('SELECT * FROM topics');
-        console.log(rows + " coming from line 9 topicControllers.js");
+        const {rows} = await pool.query(
+            `SELECT 
+            topics.*,
+            user_topic_progress.is_active
+            FROM topics LEFT JOIN user_topic_progress
+            ON topics.topic_id = user_topic_progress.topic_id
+            AND user_topic_progress.user_id = $1 
+            ORDER BY topics.topic_id;`, [id]);
+        console.log("succesfully sent the topics table with is_active" + " coming from line 14 getTopics.js");
         res.status(200).json({data: rows})
     }catch(err){
 
-        console.log(err);
+      console.log(err.message + " coming from line 14 getTopics.js");
     }
 
 }
