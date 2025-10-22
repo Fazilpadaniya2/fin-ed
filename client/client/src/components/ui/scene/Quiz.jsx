@@ -5,15 +5,33 @@ export default function Quiz({ question, option_a, option_b, option_c, option_d,
 const [check, setCheck] = useState(null);
 const options = [option_a, option_b, option_c, option_d]
 
-console.log(answer);
 
-  function handleClick(e){
-   setSelected(e.target.innerHTML);
-
-  if(e.target.innerHTML === answer){
-    console.log("here")
+function handleClick(e, idx){
+  setSelected(e.target.innerHTML);
+  console.log(idx);
+  let optNum = "x";
+   switch (idx) {
+    case 0:
+      optNum = "A";
+      break;
+    case 1:
+      optNum = "B";
+      break;
+    case 2:
+      optNum = "C";
+      break;
+    case 3:
+      optNum = "D";
+        break;
+      default:
+        break;
+   }
+   console.log(optNum);
+  if(optNum == answer.trim()){
+    console.log("line 14 QUiz.jsx")
     setCheck(true);
-    
+
+    postCompleted(true);
    }else{
 
    setCheck(false);
@@ -40,7 +58,7 @@ useEffect(() => {
             {options.map((opt, idx) => (
               <button
                 key={idx}
-                onClick={handleClick}
+                onClick={(e) => handleClick(e, idx)}
                 className={`p-2 rounded-lg border ${
                   selected === opt ? "bg-green-500 text-white" : "bg-white"
                 }`}

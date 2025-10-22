@@ -10,8 +10,7 @@ export const getScenes= async (req, res)=>{
 
 
             
-           
-            if(Number.isInteger(topicsId)==false || topicsId<=0){
+        if(Number.isInteger(topicsId)==false || topicsId<=0){
                 res.status(400).json({error:"Invalid topicId"})
             }
             const sql = `
@@ -66,8 +65,8 @@ export const post_user_scene_progress = async(req, res)=>{
     try{
 
         const{userId, sceneId} = req.params;
-        const{status} = req.body;
-
+        const{is_completed} = req.body;
+        console.log("coming from line 69 of sceneController ", is_completed)
         if(!Number.isInteger(sceneId) || sceneId<=0){
             return res.status(400).json({error: 'scene_id is not a integer'});
 
@@ -78,7 +77,7 @@ export const post_user_scene_progress = async(req, res)=>{
         VALUES($1,$2,$3)
         `;
         
-       const {rows} =  await pool.query(sql, [userId, sceneId, status]);
+       const {rows} =  await pool.query(sql, [userId, sceneId, is_completed]);
 
         if (rows.length === 0) {
       return res.status(404).json({ error: 'Scene not found' });
