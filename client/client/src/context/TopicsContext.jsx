@@ -23,7 +23,7 @@ useEffect(() => {
   console.log(data.data, "coming from line 23 Topiccontext.jsx");
   setLoading(false);
   }catch(err){
-      setErr(err.message);
+      setErr(err.message + "coming from line 26 ropicsContext");
   }
 }
 

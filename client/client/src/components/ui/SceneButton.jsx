@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../lib/api";
 
-export default function SceneButton({ topicId, number, title, scene_id }) {
+export default function SceneButton({ topicId, number, title, scene_id, is_complete }) {
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-    
-  });
+    setCompleted(is_complete)
+  },[is_complete]);
 
   const cardClass = completed
     ? "relative flex items-center gap-4 rounded-2xl bg-gradient-to-b from-slate-700 to-slate-800 p-3 ring-1 ring-emerald-500/30 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-emerald-400/60"

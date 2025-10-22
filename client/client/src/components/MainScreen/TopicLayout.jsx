@@ -47,6 +47,7 @@ export default function Topics() {
             {scenes.map((s) => (
               <div key={s.scene_id} className="shrink-0 snap-start">
                 <SceneButton
+                status={s.is_completed}
                   scene_id={s.scene_id}
                   topicId={s.topic_id}
                   number={s.number}
