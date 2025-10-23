@@ -65,20 +65,18 @@ export const post_user_scene_progress = async(req, res)=>{
 
     try{
 
-        const{userId, sceneId} = req.params;
-        const{status} = req.body;
-
-        if(!Number.isInteger(sceneId) || sceneId<=0){
-            return res.status(400).json({error: 'scene_id is not a integer'});
-
-        }
+        const{scene_id} = req.params;
+        const {id} = req.user;
+        const{is_completed} = req.body;
+        console.log(id, scene_id, is_completed, "70 line SceneControleer")
+      
        
         const sql = `
         INSERT INTO user_scene_progress(user_id, scene_id, is_completed) 
         VALUES($1,$2,$3)
         `;
         
-       const {rows} =  await pool.query(sql, [userId, sceneId, status]);
+       const {rows} =  await pool.query(sql, [id, scene_id, is_completed]);
 
         if (rows.length === 0) {
       return res.status(404).json({ error: 'Scene not found' });

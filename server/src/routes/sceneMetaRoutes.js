@@ -7,6 +7,6 @@ import { requireAuth } from '../middleware/auth.js';
 const router = express.Router({ mergeParams: true });
 
 // router.post('/:sceneid/completed', requireAuth, setSceneCompleted);
-router.post('/:sceneid/completed', requireAuth, post_user_scene_progress);
+router.post('/:scene_id/completed', requireAuth, post_user_scene_progress);
 
 export default router;
