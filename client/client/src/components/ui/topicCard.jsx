@@ -4,6 +4,7 @@ import creditCard from '../../assets/images/credit-card.svg';
 import budgeting from '../../assets/images/budgeting.svg';
 import { Link } from 'react-router-dom';
 import api from '../../lib/api';
+import { useState } from 'react';
 export default function TopicCard({ name, position, totalScenes, status, topic_id }) {
   // pick the illustration
   let svg = null;
@@ -12,21 +13,28 @@ export default function TopicCard({ name, position, totalScenes, status, topic_i
   else if (name === "budgeting-101") svg = budgeting;
 
   // label
-  const startOrContinue = status === "active" ? "continue" : "start";
+    const startOrContinue= status === "active" ? "continue" : "start"
 
-  const handleCountinue = async()=>{
     
-    try{
-    const stored = localStorage.getItem("user");
-      if(stored){
-      const parsed = JSON.parse(stored);
-      const user_id = parsed.id
+    const handleCountinue = async (e)=>{
       
-      api.post(`/topics/${user_id}/${topic_id}/continue`, { status: "continue" } )
+      if(e.target.textContent==="continue"){
+        return
       }
-    }catch(err){
-      console.log(err.message + "coming from line 27 of topic_card")
-    }
+      console.log("triggered");
+      
+      
+        const stored = localStorage.getItem("user");
+        
+          const parsed = JSON.parse(stored);
+          const user_id = parsed.id
+          
+          try{
+         const {data} = await api.post(`/topics/${user_id}/${topic_id}/continue`, { status: "continue" } )
+          }catch(err){
+            console.log(err.message + "coming from line 31 topic cardd")
+          }
+        
     
   }
   return (

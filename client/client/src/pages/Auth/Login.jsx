@@ -40,8 +40,8 @@ function Login(){
 
             //saving token in localstorage
             localStorage.setItem("token", token);
-            localStorage.setItem("user", user);
-            nav('/dashboard');
+            localStorage.setItem("user", JSON.stringify(user));
+            nav('/');
         }catch(err){
             setErr(err.message);
         }finally{

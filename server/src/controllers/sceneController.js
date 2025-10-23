@@ -10,7 +10,8 @@ export const getScenes= async (req, res)=>{
 
 
             
-        if(Number.isInteger(topicsId)==false || topicsId<=0){
+           
+            if(Number.isInteger(topicsId)==false || topicsId<=0){
                 res.status(400).json({error:"Invalid topicId"})
             }
             const sql = `
@@ -21,7 +22,7 @@ export const getScenes= async (req, res)=>{
             LEFT JOIN user_scene_progress
             ON scenes.scene_id = user_scene_progress.scene_id
             AND user_scene_progress.user_id = $1
-            WHERE scenes.topic_id = $2`;
+           WHERE scenes.topic_id = $2`;
 
             const {rows} = await pool.query(sql, [id, topicsId]);
             console.log("coming from  getscene  got the scenes's 🤩")
@@ -65,8 +66,8 @@ export const post_user_scene_progress = async(req, res)=>{
     try{
 
         const{userId, sceneId} = req.params;
-        const{is_completed} = req.body;
-        console.log("coming from line 69 of sceneController ", is_completed)
+        const{status} = req.body;
+
         if(!Number.isInteger(sceneId) || sceneId<=0){
             return res.status(400).json({error: 'scene_id is not a integer'});
 
@@ -77,7 +78,7 @@ export const post_user_scene_progress = async(req, res)=>{
         VALUES($1,$2,$3)
         `;
         
-       const {rows} =  await pool.query(sql, [userId, sceneId, is_completed]);
+       const {rows} =  await pool.query(sql, [userId, sceneId, status]);
 
         if (rows.length === 0) {
       return res.status(404).json({ error: 'Scene not found' });

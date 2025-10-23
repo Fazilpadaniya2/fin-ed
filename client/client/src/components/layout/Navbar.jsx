@@ -22,13 +22,11 @@ export default function Navbar() {
 
     //later we will make a use Context of this
     useEffect(() => {
-      
-      const stored = localStorage.getItem("user");
+            const stored = localStorage.getItem("user");
       if(stored){
       const parsed = JSON.parse(stored);
       setUser(parsed.username);
       }
-console.log(user) ;  
     }, []);
 
     
