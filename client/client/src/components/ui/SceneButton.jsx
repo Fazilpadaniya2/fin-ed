@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import api from "../../lib/api";
 
-export default function SceneButton({ topicId, number, title, scene_id, is_complete }) {
-  const [completed, setCompleted] = useState(false);
-
-  useEffect(() => {
-    setCompleted(is_complete)
-  },[is_complete]);
-
+export default function SceneButton({ topicId, number, title, scene_id, is_completed }) {
+  // Make sure it's a real boolean even if API ever sends null/undefined
+  const completed = Boolean(is_completed);
+  console.log(completed);
   const cardClass = completed
     ? "relative flex items-center gap-4 rounded-2xl bg-gradient-to-b from-slate-700 to-slate-800 p-3 ring-1 ring-emerald-500/30 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-emerald-400/60"
     : "relative flex items-center gap-4 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 p-3 ring-1 ring-white/5 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-emerald-400/60";
@@ -28,21 +23,18 @@ export default function SceneButton({ topicId, number, title, scene_id, is_compl
   return (
     <Link
       to={`scenes/${scene_id}`}
-      role="button"
-      aria-pressed={completed}
       className="group block focus:outline-none"
+      // aria-pressed is for buttons/toggles; Links don't need it
     >
       <div className={cardClass}>
         {/* avatar / icon */}
         <div className="relative">
           <div className={avatarClass}>
             {completed ? (
-              // check icon
               <svg viewBox="0 0 24 24" className="h-7 w-7 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M20 6L9 17l-5-5" />
               </svg>
             ) : (
-              // $ icon
               <svg viewBox="0 0 24 24" className="h-7 w-7 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M12 4v16" />
                 <path d="M8.5 8.5c0-1.7 1.6-2.5 3.5-2.5s3.5.8 3.5 2.5c0 1.3-.9 2-2.7 2.4l-2.1.5c-1.7.4-2.7 1-2.7 2.4 0 1.6 1.6 2.6 3.8 2.6s3.8-1 3.8-2.6" />

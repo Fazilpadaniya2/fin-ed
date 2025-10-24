@@ -15,7 +15,9 @@ export default function Topics() {
       try {
         setLoading(true);
         const { data } = await api.get(`/topics/${topicid}/scenes`);
+        console.log(data.data[0].is_completed, "line 23 TopicLyot");
          setScenes(data?.data ?? []);
+
       } catch (e) {
         setErr(e.message ?? "Failed to load scenes");
       } finally {
@@ -47,7 +49,7 @@ export default function Topics() {
             {scenes.map((s) => (
               <div key={s.scene_id} className="shrink-0 snap-start">
                 <SceneButton
-                status={s.is_completed}
+                  is_completed={s.is_completed}
                   scene_id={s.scene_id}
                   topicId={s.topic_id}
                   number={s.number}

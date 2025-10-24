@@ -16,16 +16,16 @@ export const getScenes= async (req, res)=>{
             }
             const sql = `
             SELECT 
-            scenes.*, 
-            user_scene_progress.is_completed
-            FROM scenes
-            LEFT JOIN user_scene_progress
-            ON scenes.scene_id = user_scene_progress.scene_id
-            AND user_scene_progress.user_id = $1
-           WHERE scenes.topic_id = $2`;
+  scenes.*, 
+  user_scene_progress.is_completed
+FROM scenes
+LEFT JOIN user_scene_progress
+  ON scenes.scene_id = user_scene_progress.scene_id
+  AND user_scene_progress.user_id = $1
+WHERE scenes.topic_id = $2`;
 
             const {rows} = await pool.query(sql, [id, topicsId]);
-            console.log("coming from  getscene  got the scenes's 🤩")
+            console.log("coming from  getscene  got the scenes's 🤩", rows)
             res.status(200).json({data: rows})
     }catch(err){
         console.log(err);
