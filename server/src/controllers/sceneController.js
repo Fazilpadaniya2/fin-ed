@@ -74,6 +74,7 @@ export const post_user_scene_progress = async(req, res)=>{
         const sql = `
         INSERT INTO user_scene_progress(user_id, scene_id, is_completed) 
         VALUES($1,$2,$3)
+        RETURNING *
         `;
         
        const {rows} =  await pool.query(sql, [id, scene_id, is_completed]);
@@ -81,12 +82,18 @@ export const post_user_scene_progress = async(req, res)=>{
         if (rows.length === 0) {
       return res.status(404).json({ error: 'Scene not found' });
     }
+    try{
+        console.log( "coming from 89");
+        const {data} = await pool.query(`UPDATE user_profile SET xp = xp + 10 WHERE user_id = $1`,[id])
+        }catch(err){
+        }
     return res.status(200).json({
         data : rows[0],
         message: 'scene id updated to complete'
     })
        
     }catch(err){
+            console.log(err + "coming from 89");
       console.log(err.message);
       return res.status(500).json({ error: 'Internal server error' });
     }
