@@ -12,6 +12,7 @@ import ScenePage from "../components/MainScreen/ScenePage.jsx";
 
 import Profile from "../pages/profile.jsx";
 import Shop from "../pages/Shop.jsx";
+import More from "../pages/More.jsx";
 
 export default function AppRoutes() {
   return (
@@ -44,6 +45,15 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute>
           <Shop />
+          </ProtectedRoute>
+        }
+      ></Route> 
+
+      <Route
+        path="/more"
+        element={
+          <ProtectedRoute>
+          <More />
           </ProtectedRoute>
         }
       ></Route> 
