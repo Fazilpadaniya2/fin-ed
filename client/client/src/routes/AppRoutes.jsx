@@ -11,6 +11,7 @@ import TopicLayout from "../components/MainScreen/TopicLayout.jsx";
 import ScenePage from "../components/MainScreen/ScenePage.jsx";
 
 import Profile from "../pages/profile.jsx";
+import Shop from "../pages/Shop.jsx";
 
 export default function AppRoutes() {
   return (
@@ -35,6 +36,14 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute>
           <Profile />
+          </ProtectedRoute>
+        }
+      ></Route> 
+      <Route
+        path="/shop"
+        element={
+          <ProtectedRoute>
+          <Shop />
           </ProtectedRoute>
         }
       ></Route> 
