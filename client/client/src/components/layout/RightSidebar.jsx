@@ -1,50 +1,78 @@
 import React from "react";
 
-export default function RightSidebar() {
+export default function RightSidebar({ user }) {
+  const fallbackUser = {
+    username: "Learner",
+    tag: "@start-fin",
+    streakCount: 0,
+    xp: 0,
+    grade: "N/A",
+  };
+
+  const profile = { ...fallbackUser, ...user };
+
+  const formattedXp =
+    typeof profile.xp === "number"
+      ? profile.xp.toLocaleString()
+      : profile.xp ?? fallbackUser.xp;
+
+  const formattedTag = profile.tag?.startsWith("@")
+    ? profile.tag
+    : profile.tag
+    ? `@${profile.tag}`
+    : fallbackUser.tag;
+
+  const stats = [
+    {
+      label: "Streak",
+      value: `${profile.streakCount} day${
+        profile.streakCount === 1 ? "" : "s"
+      }`,
+      highlightClass: "text-[var(--color-brand-600)]",
+    },
+    {
+      label: "XP",
+      value: formattedXp,
+      highlightClass: "text-[var(--color-accent-600)]",
+    },
+    {
+      label: "Grade",
+      value: profile.grade,
+      highlightClass: "text-[var(--color-brand-700)]",
+    },
+  ];
+
   return (
-    <div className="w-72 sticky top-2 flex flex-col gap-4 p-4 bg-[var(--color-neutral-50)] text-[var(--color-neutral-900)] rounded-xl shadow-lg">
-      {/* Unlock Leaderboards */}
-      <div className="bg-[var(--color-neutral-100)] p-4 rounded-lg shadow-sm">
-        <h3 className="font-semibold text-lg text-[var(--color-brand-700)] mb-2">
-          Unlock Leaderboards!
-        </h3>
-        <p className="text-sm text-[var(--color-neutral-500)]">
-          Complete <span className="font-semibold">10 more lessons</span> to
-          start competing.
-        </p>
-      </div>
-
-      {/* Daily Quests */}
-      <div className="bg-[var(--color-neutral-100)] p-4 rounded-lg shadow-sm">
-        <h3 className="font-semibold text-lg text-[var(--color-accent-600)] mb-2">
-          Daily Quests
-        </h3>
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-sm">Earn 10 XP</span>
-          <span className="text-xs text-[var(--color-neutral-500)]">0 / 10</span>
+    <div className="flex h-full flex-col gap-6 text-[var(--color-neutral-50)]">
+      <section className="rounded-3xl bg-[var(--color-neutral-50)] p-6 text-[var(--color-neutral-900)] shadow-2xl">
+        <div className="flex flex-col gap-1">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-neutral-500)]">
+            Learner Profile
+          </span>
+          <h2 className="text-2xl font-bold text-[var(--color-brand-700)]">
+            {profile.username}
+          </h2>
+          <span className="text-sm font-medium text-[var(--color-accent-600)]">
+            {formattedTag}
+          </span>
         </div>
-        <div className="w-full h-2 bg-[var(--color-neutral-50)] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-[var(--color-accent-500)]"
-            style={{ width: "0%" }}
-          ></div>
-        </div>
-      </div>
 
-      {/* Create Profile 
-      <div className="bg-[var(--color-neutral-100)] p-4 rounded-lg shadow-sm flex flex-col gap-3">
-        <h3 className="font-semibold text-lg">Create a profile</h3>
-        <p className="text-sm text-[var(--color-neutral-500)]">
-          Save your progress!
-        </p>
-        <button className="bg-[var(--color-brand-500)] hover:bg-[var(--color-brand-600)] text-white py-2 rounded-lg font-semibold transition">
-          Create a Profile
-        </button>
-        <button className="bg-white text-[var(--color-brand-500)] border border-[var(--color-brand-500)] hover:bg-[var(--color-brand-50)] py-2 rounded-lg font-semibold transition">
-          Sign In
-        </button>
-      </div>
-      */}
+        <div className="mt-6 grid grid-cols-3 gap-3">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-2xl bg-[var(--color-neutral-100)] p-4 text-center shadow-sm"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-neutral-500)]">
+                {stat.label}
+              </p>
+              <p className={`mt-2 text-lg font-semibold ${stat.highlightClass}`}>
+                {stat.value}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

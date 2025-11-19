@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const items = [
-  { to: "/learn",         icon: "🏠", label: "LEARN" },
-  { to: "/quests",        icon: "🎯", label: "QUESTS" },
+  { to: "/",         icon: "🏠", label: "LEARN" },
   { to: "/shop",          icon: "🛍️", label: "SHOP" },
   { to: "/profile",       icon: "👤", label: "PROFILE" },
   { to: "/more",          icon: "⋯", label: "MORE" },
